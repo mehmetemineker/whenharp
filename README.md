@@ -18,8 +18,11 @@ Install via NuGet:
 
 ```bash
 dotnet add package WhenSharp
+```
 
-```csharp
+## 💡 Usage Example
+
+```cs
 using WhenSharp;
 
 var rule = TimeRule.Parse("EveryWeekend from 12:00 to 17:00");
@@ -30,3 +33,5 @@ if (rule.IsMatch(now))
 {
     Console.WriteLine("Rule matched!");
 }
+```
+
