@@ -10,7 +10,6 @@
 - 🔁 Recurring day rules: `EveryMonday`, `EveryWeekend`
 - ⏰ Daily time intervals combined with day rules: `EveryMonday from 12:00 to 17:00`
 - 💥 Throws detailed `ArgumentException` for invalid inputs
-- 🧪 Unit tests powered by NUnit
 
 ## 📦 Installation
 
