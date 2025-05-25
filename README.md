@@ -1,6 +1,6 @@
-# WhenSharp
+# Whenharp
 
-**WhenSharp** is a lightweight and powerful .NET library designed to parse human-readable time rules and determine whether a given `DateTime` matches those rules.
+**Whenharp** is a lightweight and powerful .NET library designed to parse human-readable time rules and determine whether a given `DateTime` matches those rules.
 
 ## 🚀 Features
 
@@ -17,13 +17,13 @@
 Install via NuGet:
 
 ```bash
-dotnet add package WhenSharp
+dotnet add package Whenharp
 ```
 
 ## 💡 Usage Example
 
 ```cs
-using WhenSharp;
+using Whenharp;
 
 var rule = TimeRule.Parse("EveryWeekend from 12:00 to 17:00");
 
