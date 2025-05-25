@@ -11,7 +11,7 @@ public class RangeRule : TimeRule
         To = to;
     }
 
-    public override bool IsMatch(DateTime dateTime)
+    public override bool Match(DateTime dateTime)
     {
         return dateTime >= From && dateTime <= To;
     }

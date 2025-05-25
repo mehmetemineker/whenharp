@@ -5,7 +5,7 @@ public class RecurringRule(string day, TimeSpan? fromTime, TimeSpan? toTime) : T
     public TimeSpan? FromTime { get; } = fromTime;
     public TimeSpan? ToTime { get; } = toTime;
 
-    public override bool IsMatch(DateTime dateTime)
+    public override bool Match(DateTime dateTime)
     {
         bool dayMatches = Day.ToLowerInvariant() switch
         {

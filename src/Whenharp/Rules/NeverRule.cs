@@ -1,5 +1,5 @@
 ﻿namespace Whenharp.Rules;
 public class NeverRule : TimeRule
 {
-    public override bool IsMatch(DateTime dateTime) => false;
+    public override bool Match(DateTime dateTime) => false;
 }

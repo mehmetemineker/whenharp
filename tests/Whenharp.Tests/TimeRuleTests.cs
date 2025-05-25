@@ -7,16 +7,16 @@ public class TimeRuleTests
     public void AlwaysRule_ShouldAlwaysReturnTrue(string input, bool expected)
     {
         var rule = TimeRule.Parse(input);
-        Assert.That(rule.IsMatch(DateTime.Now), Is.True);
-        Assert.That(rule.IsMatch(DateTime.Now), Is.EqualTo(expected));
+        Assert.That(rule.Match(DateTime.Now), Is.True);
+        Assert.That(rule.Match(DateTime.Now), Is.EqualTo(expected));
     }
 
     [TestCase("Never", false)]
     public void NeverRule_ShouldAlwaysReturnFalse(string input, bool expected)
     {
         var rule = TimeRule.Parse(input);
-        Assert.That(rule.IsMatch(DateTime.Now), Is.False);
-        Assert.That(rule.IsMatch(DateTime.Now), Is.EqualTo(expected));
+        Assert.That(rule.Match(DateTime.Now), Is.False);
+        Assert.That(rule.Match(DateTime.Now), Is.EqualTo(expected));
     }
 
     [Test]
@@ -31,9 +31,9 @@ public class TimeRuleTests
 
         Assert.Multiple(() =>
         {
-            Assert.That(rule.IsMatch(insideDate), Is.True);
-            Assert.That(rule.IsMatch(outsideDateBefore), Is.False);
-            Assert.That(rule.IsMatch(outsideDateAfter), Is.False);
+            Assert.That(rule.Match(insideDate), Is.True);
+            Assert.That(rule.Match(outsideDateBefore), Is.False);
+            Assert.That(rule.Match(outsideDateAfter), Is.False);
         });
     }
 
@@ -61,7 +61,7 @@ public class TimeRuleTests
             testDate = testDate.AddDays(1);
         }
 
-        Assert.That(rule.IsMatch(testDate), Is.EqualTo(expected));
+        Assert.That(rule.Match(testDate), Is.EqualTo(expected));
     }
 
     [Test]
@@ -77,10 +77,10 @@ public class TimeRuleTests
 
         Assert.Multiple(() =>
         {
-            Assert.That(rule.IsMatch(saturdayInRange), Is.True);
-            Assert.That(rule.IsMatch(saturdayBefore), Is.False);
-            Assert.That(rule.IsMatch(saturdayAfter), Is.False);
-            Assert.That(rule.IsMatch(fridayInRange), Is.False);
+            Assert.That(rule.Match(saturdayInRange), Is.True);
+            Assert.That(rule.Match(saturdayBefore), Is.False);
+            Assert.That(rule.Match(saturdayAfter), Is.False);
+            Assert.That(rule.Match(fridayInRange), Is.False);
         });
     }
 
@@ -96,8 +96,99 @@ public class TimeRuleTests
             testDate = testDate.AddDays(1);
         }
 
-        Assert.That(rule.IsMatch(testDate), Is.EqualTo(expected));
+        Assert.That(rule.Match(testDate), Is.EqualTo(expected));
     }
+
+    [TestCase("EveryTuesday", DayOfWeek.Tuesday, true)]
+    [TestCase("EveryTuesday", DayOfWeek.Wednesday, false)]
+    public void RecurringRule_EveryTuesday_ShouldMatchCorrectDay(string input, DayOfWeek day, bool expected)
+    {
+        var rule = TimeRule.Parse(input);
+        var testDate = new DateTime(2025, 04, 21);
+
+        while (testDate.DayOfWeek != day)
+        {
+            testDate = testDate.AddDays(1);
+        }
+
+        Assert.That(rule.Match(testDate), Is.EqualTo(expected));
+    }
+
+    [TestCase("EveryWednesday", DayOfWeek.Wednesday, true)]
+    [TestCase("EveryWednesday", DayOfWeek.Thursday, false)]
+    public void RecurringRule_EveryWednesday_ShouldMatchCorrectDay(string input, DayOfWeek day, bool expected)
+    {
+        var rule = TimeRule.Parse(input);
+        var testDate = new DateTime(2025, 04, 23);
+
+        while (testDate.DayOfWeek != day)
+        {
+            testDate = testDate.AddDays(1);
+        }
+
+        Assert.That(rule.Match(testDate), Is.EqualTo(expected));
+    }
+
+    [TestCase("EveryThursday", DayOfWeek.Thursday, true)]
+    [TestCase("EveryThursday", DayOfWeek.Friday, false)]
+    public void RecurringRule_EveryThursday_ShouldMatchCorrectDay(string input, DayOfWeek day, bool expected)
+    {
+        var rule = TimeRule.Parse(input);
+        var testDate = new DateTime(2025, 04, 24);
+
+        while (testDate.DayOfWeek != day)
+        {
+            testDate = testDate.AddDays(1);
+        }
+
+        Assert.That(rule.Match(testDate), Is.EqualTo(expected));
+    }
+
+    [TestCase("EveryFriday", DayOfWeek.Friday, true)]
+    [TestCase("EveryFriday", DayOfWeek.Saturday, false)]
+    public void RecurringRule_EveryFriday_ShouldMatchCorrectDay(string input, DayOfWeek day, bool expected)
+    {
+        var rule = TimeRule.Parse(input);
+        var testDate = new DateTime(2025, 04, 25);
+
+        while (testDate.DayOfWeek != day)
+        {
+            testDate = testDate.AddDays(1);
+        }
+
+        Assert.That(rule.Match(testDate), Is.EqualTo(expected));
+    }
+
+    [TestCase("EverySaturday", DayOfWeek.Saturday, true)]
+    [TestCase("EverySaturday", DayOfWeek.Sunday, false)]
+    public void RecurringRule_EverySaturday_ShouldMatchCorrectDay(string input, DayOfWeek day, bool expected)
+    {
+        var rule = TimeRule.Parse(input);
+        var testDate = new DateTime(2025, 04, 26);
+
+        while (testDate.DayOfWeek != day)
+        {
+            testDate = testDate.AddDays(1);
+        }
+
+        Assert.That(rule.Match(testDate), Is.EqualTo(expected));
+    }
+
+    [TestCase("EverySunday", DayOfWeek.Sunday, true)]
+    [TestCase("EverySunday", DayOfWeek.Monday, false)]
+    public void RecurringRule_EverySunday_ShouldMatchCorrectDay(string input, DayOfWeek day, bool expected)
+    {
+        var rule = TimeRule.Parse(input);
+        var testDate = new DateTime(2025, 04, 27);
+
+        while (testDate.DayOfWeek != day)
+        {
+            testDate = testDate.AddDays(1);
+        }
+
+        Assert.That(rule.Match(testDate), Is.EqualTo(expected));
+    }
+
 
     [Test]
     public void RecurringRule_EveryMonday_WithTime_ShouldMatchCorrectly()
@@ -112,10 +203,10 @@ public class TimeRuleTests
 
         Assert.Multiple(() =>
         {
-            Assert.That(rule.IsMatch(mondayInRange), Is.True);
-            Assert.That(rule.IsMatch(mondayBefore), Is.False);
-            Assert.That(rule.IsMatch(mondayAfter), Is.False);
-            Assert.That(rule.IsMatch(tuesdayInRange), Is.False);
+            Assert.That(rule.Match(mondayInRange), Is.True);
+            Assert.That(rule.Match(mondayBefore), Is.False);
+            Assert.That(rule.Match(mondayAfter), Is.False);
+            Assert.That(rule.Match(tuesdayInRange), Is.False);
         });
     }
 

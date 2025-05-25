@@ -7,7 +7,7 @@ public abstract class TimeRule
     /// <summary>
     /// Returns true if the given datetime matches the rule.
     /// </summary>
-    public abstract bool IsMatch(DateTime dateTime);
+    public abstract bool Match(DateTime dateTime);
 
     /// <summary>
     /// Parse the rule expression and return the appropriate TimeRule object.
@@ -47,7 +47,7 @@ public abstract class TimeRule
             }
         }
 
-        // EveryWeekend [from HH:mm to HH:mm]
+        // EveryWeekend from HH:mm to HH:mm
         var everyWeekendPattern = @"^EveryWeekend(?:\s+from\s+(\d{2}:\d{2})\s+to\s+(\d{2}:\d{2}))?$";
         var weekendMatch = Regex.Match(input, everyWeekendPattern, RegexOptions.IgnoreCase);
         if (weekendMatch.Success)
