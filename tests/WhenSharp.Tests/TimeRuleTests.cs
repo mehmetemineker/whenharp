@@ -4,7 +4,6 @@ namespace WhenSharp.Tests;
 public class TimeRuleTests
 {
     [TestCase("Always", true)]
-    [TestCase("Allways", true)]
     public void AlwaysRule_ShouldAlwaysReturnTrue(string input, bool expected)
     {
         var rule = TimeRule.Parse(input);
@@ -55,7 +54,7 @@ public class TimeRuleTests
     public void RecurringRule_EveryWeekend_DayMatch(string input, DayOfWeek day, bool expected)
     {
         var rule = TimeRule.Parse(input);
-        var testDate = new DateTime(2025, 04, 19); // Cumartesi
+        var testDate = new DateTime(2025, 04, 19);
 
         while (testDate.DayOfWeek != day)
         {

@@ -5,12 +5,12 @@ namespace WhenSharp.Rules;
 public abstract class TimeRule
 {
     /// <summary>
-    /// Verilen datetime, kurala uyuyorsa true döner.
+    /// Returns true if the given datetime matches the rule.
     /// </summary>
     public abstract bool IsMatch(DateTime dateTime);
 
     /// <summary>
-    /// Kural ifadesini parse edip uygun TimeRule nesnesini döner.
+    /// Parse the rule expression and return the appropriate TimeRule object.
     /// </summary>
     public static TimeRule Parse(string input)
     {
@@ -20,8 +20,7 @@ public abstract class TimeRule
         input = input.Trim();
 
         // Always
-        if (string.Equals(input, "Always", StringComparison.OrdinalIgnoreCase) ||
-            string.Equals(input, "Allways", StringComparison.OrdinalIgnoreCase)) // Yazım hatası için destek
+        if (string.Equals(input, "Always", StringComparison.OrdinalIgnoreCase))
         {
             return new AlwaysRule();
         }
@@ -71,7 +70,7 @@ public abstract class TimeRule
             return new RecurringRule("Weekend", fromTime, toTime);
         }
 
-        // EveryMonday gibi tek gün
+        // One day like EveryMonday
         var everyDayPattern = @"^Every(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)$";
         var everyDayMatch = Regex.Match(input, everyDayPattern, RegexOptions.IgnoreCase);
         if (everyDayMatch.Success)
