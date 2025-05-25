@@ -1,6 +1,6 @@
-﻿using WhenSharp.Rules;
+﻿using Whenharp.Rules;
 
-namespace WhenSharp.Tests;
+namespace Whenharp.Tests;
 public class TimeRuleTests
 {
     [TestCase("Always", true)]

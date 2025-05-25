@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using System.Text.RegularExpressions;
 
-namespace WhenSharp.Rules;
+namespace Whenharp.Rules;
 public abstract class TimeRule
 {
     /// <summary>

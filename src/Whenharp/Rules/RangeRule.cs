@@ -1,4 +1,4 @@
-﻿namespace WhenSharp.Rules;
+﻿namespace Whenharp.Rules;
 public class RangeRule : TimeRule
 {
     public DateTime From { get; }

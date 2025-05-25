@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\WhenSharp\WhenSharp.csproj" />
+    <ProjectReference Include="..\..\src\Whenharp\Whenharp.csproj" />
   </ItemGroup>
 
   <ItemGroup>

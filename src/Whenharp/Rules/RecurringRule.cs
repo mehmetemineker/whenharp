@@ -1,4 +1,4 @@
-﻿namespace WhenSharp.Rules;
+﻿namespace Whenharp.Rules;
 public class RecurringRule(string day, TimeSpan? fromTime, TimeSpan? toTime) : TimeRule
 {
     public string Day { get; } = day;
