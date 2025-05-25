@@ -28,7 +28,7 @@ var rule = TimeRule.Parse("EveryWeekend from 12:00 to 17:00");
 
 var now = new DateTime(2025, 4, 19, 13, 0, 0); // Saturday at 13:00
 
-if (rule.IsMatch(now))
+if (rule.Match(now))
 {
     Console.WriteLine("Rule matched!");
 }
