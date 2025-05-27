@@ -19,18 +19,68 @@ Install via NuGet:
 dotnet add package Whenharp
 ```
 
-## 💡 Usage Example
+## 📌 Usage Examples
 
+### ✅ Basic Usage
 ```cs
-using Whenharp;
+using WhenSharp;
 
-var rule = TimeRule.Parse("EveryWeekend from 12:00 to 17:00");
+// Parse a time rule
+TimeRule rule = TimeRule.Parse("EveryMonday from 09:00 to 17:00");
 
-var now = new DateTime(2025, 4, 19, 13, 0, 0); // Saturday at 13:00
+// Check if a given DateTime matches the rule
+bool isMatch = rule.Match(DateTime.Now);
 
-if (rule.Match(now))
-{
-    Console.WriteLine("Rule matched!");
-}
+Console.WriteLine($"Is match: {isMatch}");
 ```
 
+## 📅 Supported Rule Formats
+### 🔹 Always
+```cs
+TimeRule rule = TimeRule.Parse("Always");
+rule.Match(DateTime.Now); // always true
+```
+### 🔹 Never
+```cs
+TimeRule rule = TimeRule.Parse("Never");
+rule.Match(DateTime.Now); // always false
+```
+### 🔹 From a Specific DateTime to Another
+```cs
+TimeRule rule = TimeRule.Parse("From 2025-04-23T08:30 to 2025-04-23T17:45");
+rule.Match(new DateTime(2025, 4, 23, 9, 0, 0)); // true
+rule.Match(new DateTime(2025, 4, 24, 9, 0, 0)); // false
+```
+### 🔹 Recurring Rule: Every Day of the Week
+```cs
+TimeRule rule = TimeRule.Parse("EveryMonday");
+rule.Match(new DateTime(2025, 5, 5)); // true if Monday
+```
+### 🔹 Recurring with Time Range
+```cs
+TimeRule rule = TimeRule.Parse("EveryFriday from 14:00 to 18:00");
+rule.Match(new DateTime(2025, 6, 6, 15, 30, 0)); // true
+rule.Match(new DateTime(2025, 6, 6, 19, 0, 0));  // false
+```
+### 🔹 EveryWeekend (Saturday & Sunday)
+```cs
+TimeRule rule = TimeRule.Parse("EveryWeekend");
+rule.Match(new DateTime(2025, 5, 25)); // true if Sunday
+```
+### 🔹 EveryWeekend with Time Range
+```cs
+TimeRule rule = TimeRule.Parse("EveryWeekend from 10:00 to 16:00");
+rule.Match(new DateTime(2025, 5, 24, 12, 0, 0)); // true if Saturday
+```
+
+## ⚠️ Invalid Rule Handling
+```cs
+try
+{
+    var rule = TimeRule.Parse("EveryBlursday");
+}
+catch (ArgumentException ex)
+{
+    Console.WriteLine($"Invalid rule: {ex.Message}");
+}
+```
