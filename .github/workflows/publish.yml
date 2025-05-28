@@ -18,6 +18,10 @@ jobs:
         with:
           dotnet-version: '9.x'
 
+      - uses: nuget/setup-nuget@v1
+        with:
+          nuget-version: '5.x'
+
       - name: Build project
         run: dotnet build --configuration Release
 
