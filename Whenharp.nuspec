@@ -11,7 +11,7 @@
     <description>Whenharp is a lightweight and powerful .NET library designed to parse human-readable time rules and determine whether a given DateTime matches those rules.</description>
     <releaseNotes>Initial release with basic rules like Always, Never, Range, and recurring day-time combinations.</releaseNotes>
     <copyright>Copyright © 2025 Mehmet Emin Eker</copyright>
-    <tags>datetime scheduler rules time dotnet</tags>
+    <tags>datetime rules time dotnet</tags>
   </metadata>
 
   <files>
