@@ -1,10 +1,10 @@
-name: Publish NuGet Package
+name: NuGet Package Publish
 
 on:
   push:
     paths:
       - '**/*.nuspec'
-
+      
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
@@ -14,15 +14,25 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '9.x'
 
-      - name: Build project
-        run: dotnet build --configuration Release
+      - name: Restore dependencies
+        run: dotnet restore
 
-      - name: Pack with .nuspec
+      - name: Publish project
+        run: dotnet publish src/Whenharp/Whenharp.csproj --configuration Release --output ./publish/net9.0 --framework net9.0
+
+      - name: Pack NuGet package
         run: nuget pack Whenharp.nuspec
 
-      - name: Push to NuGet.org
-        run: dotnet nuget push *.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+      - name: Setup NuGet CLI
+        uses: nuget/setup-nuget@v1
+        with:
+          nuget-version: '5.x'
+
+      - name: Push NuGet package
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: nuget push *.nupkg -Source https://api.nuget.org/v3/index.json -ApiKey $NUGET_API_KEY
