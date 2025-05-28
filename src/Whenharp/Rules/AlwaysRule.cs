@@ -1,5 +1,5 @@
 ﻿namespace Whenharp.Rules;
-public class AlwaysRule : TimeRule
+public class AlwaysRule : When
 {
     public override bool Match(DateTime dateTime) => true;
 }

@@ -1,12 +1,12 @@
 ﻿using Whenharp.Rules;
 
 namespace Whenharp.Tests;
-public class TimeRuleTests
+public class WhenTests
 {
     [TestCase("Always", true)]
     public void AlwaysRule_ShouldAlwaysReturnTrue(string input, bool expected)
     {
-        var rule = TimeRule.Parse(input);
+        var rule = When.Parse(input);
         Assert.That(rule.Match(DateTime.Now), Is.True);
         Assert.That(rule.Match(DateTime.Now), Is.EqualTo(expected));
     }
@@ -14,7 +14,7 @@ public class TimeRuleTests
     [TestCase("Never", false)]
     public void NeverRule_ShouldAlwaysReturnFalse(string input, bool expected)
     {
-        var rule = TimeRule.Parse(input);
+        var rule = When.Parse(input);
         Assert.That(rule.Match(DateTime.Now), Is.False);
         Assert.That(rule.Match(DateTime.Now), Is.EqualTo(expected));
     }
@@ -23,7 +23,7 @@ public class TimeRuleTests
     public void RangeRule_ShouldReturnTrue_WithinRange()
     {
         var input = "From 2025-04-23T12:00 to 2025-04-23T17:00";
-        var rule = TimeRule.Parse(input);
+        var rule = When.Parse(input);
 
         var insideDate = new DateTime(2025, 04, 23, 13, 0, 0);
         var outsideDateBefore = new DateTime(2025, 04, 23, 11, 59, 59);
@@ -53,7 +53,7 @@ public class TimeRuleTests
     [TestCase("EveryWeekend", DayOfWeek.Friday, false)]
     public void RecurringRule_EveryWeekend_DayMatch(string input, DayOfWeek day, bool expected)
     {
-        var rule = TimeRule.Parse(input);
+        var rule = When.Parse(input);
         var testDate = new DateTime(2025, 04, 19);
 
         while (testDate.DayOfWeek != day)
@@ -68,7 +68,7 @@ public class TimeRuleTests
     public void RecurringRule_EveryWeekend_WithTime_ShouldMatch()
     {
         var input = "EveryWeekend from 12:00 to 17:00";
-        var rule = TimeRule.Parse(input);
+        var rule = When.Parse(input);
 
         var saturdayInRange = new DateTime(2025, 04, 19, 13, 0, 0);
         var saturdayBefore = new DateTime(2025, 04, 19, 11, 59, 0);
@@ -88,7 +88,7 @@ public class TimeRuleTests
     [TestCase("EveryMonday", DayOfWeek.Tuesday, false)]
     public void RecurringRule_EveryMonday_ShouldMatchCorrectDay(string input, DayOfWeek day, bool expected)
     {
-        var rule = TimeRule.Parse(input);
+        var rule = When.Parse(input);
         var testDate = new DateTime(2025, 04, 21);
 
         while (testDate.DayOfWeek != day)
@@ -103,7 +103,7 @@ public class TimeRuleTests
     [TestCase("EveryTuesday", DayOfWeek.Wednesday, false)]
     public void RecurringRule_EveryTuesday_ShouldMatchCorrectDay(string input, DayOfWeek day, bool expected)
     {
-        var rule = TimeRule.Parse(input);
+        var rule = When.Parse(input);
         var testDate = new DateTime(2025, 04, 21);
 
         while (testDate.DayOfWeek != day)
@@ -118,7 +118,7 @@ public class TimeRuleTests
     [TestCase("EveryWednesday", DayOfWeek.Thursday, false)]
     public void RecurringRule_EveryWednesday_ShouldMatchCorrectDay(string input, DayOfWeek day, bool expected)
     {
-        var rule = TimeRule.Parse(input);
+        var rule = When.Parse(input);
         var testDate = new DateTime(2025, 04, 23);
 
         while (testDate.DayOfWeek != day)
@@ -133,7 +133,7 @@ public class TimeRuleTests
     [TestCase("EveryThursday", DayOfWeek.Friday, false)]
     public void RecurringRule_EveryThursday_ShouldMatchCorrectDay(string input, DayOfWeek day, bool expected)
     {
-        var rule = TimeRule.Parse(input);
+        var rule = When.Parse(input);
         var testDate = new DateTime(2025, 04, 24);
 
         while (testDate.DayOfWeek != day)
@@ -148,7 +148,7 @@ public class TimeRuleTests
     [TestCase("EveryFriday", DayOfWeek.Saturday, false)]
     public void RecurringRule_EveryFriday_ShouldMatchCorrectDay(string input, DayOfWeek day, bool expected)
     {
-        var rule = TimeRule.Parse(input);
+        var rule = When.Parse(input);
         var testDate = new DateTime(2025, 04, 25);
 
         while (testDate.DayOfWeek != day)
@@ -163,7 +163,7 @@ public class TimeRuleTests
     [TestCase("EverySaturday", DayOfWeek.Sunday, false)]
     public void RecurringRule_EverySaturday_ShouldMatchCorrectDay(string input, DayOfWeek day, bool expected)
     {
-        var rule = TimeRule.Parse(input);
+        var rule = When.Parse(input);
         var testDate = new DateTime(2025, 04, 26);
 
         while (testDate.DayOfWeek != day)
@@ -178,7 +178,7 @@ public class TimeRuleTests
     [TestCase("EverySunday", DayOfWeek.Monday, false)]
     public void RecurringRule_EverySunday_ShouldMatchCorrectDay(string input, DayOfWeek day, bool expected)
     {
-        var rule = TimeRule.Parse(input);
+        var rule = When.Parse(input);
         var testDate = new DateTime(2025, 04, 27);
 
         while (testDate.DayOfWeek != day)
@@ -194,7 +194,7 @@ public class TimeRuleTests
     public void RecurringRule_EveryMonday_WithTime_ShouldMatchCorrectly()
     {
         var input = "EveryMonday from 12:00 to 17:00";
-        var rule = TimeRule.Parse(input);
+        var rule = When.Parse(input);
 
         var mondayInRange = new DateTime(2025, 04, 21, 13, 0, 0);
         var mondayBefore = new DateTime(2025, 04, 21, 11, 59, 59);
@@ -224,7 +224,7 @@ public class TimeRuleTests
 
         foreach (var input in invalidInputs)
         {
-            Assert.Throws<ArgumentException>(() => TimeRule.Parse(input));
+            Assert.Throws<ArgumentException>(() => When.Parse(input));
         }
     }
 }

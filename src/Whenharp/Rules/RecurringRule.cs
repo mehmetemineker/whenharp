@@ -1,5 +1,5 @@
 ﻿namespace Whenharp.Rules;
-public class RecurringRule(string day, TimeSpan? fromTime, TimeSpan? toTime) : TimeRule
+public class RecurringRule(string day, TimeSpan? fromTime, TimeSpan? toTime) : When
 {
     public string Day { get; } = day;
     public TimeSpan? FromTime { get; } = fromTime;

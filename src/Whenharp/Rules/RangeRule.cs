@@ -1,5 +1,5 @@
 ﻿namespace Whenharp.Rules;
-public class RangeRule : TimeRule
+public class RangeRule : When
 {
     public DateTime From { get; }
     public DateTime To { get; }

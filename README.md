@@ -26,7 +26,7 @@ dotnet add package Whenharp
 using WhenSharp;
 
 // Parse a time rule
-TimeRule rule = TimeRule.Parse("EveryMonday from 09:00 to 17:00");
+var rule = When.Parse("EveryMonday from 09:00 to 17:00");
 
 // Check if a given DateTime matches the rule
 bool isMatch = rule.Match(DateTime.Now);
@@ -37,39 +37,39 @@ Console.WriteLine($"Is match: {isMatch}");
 ## 📅 Supported Rule Formats
 ### 🔹 Always
 ```cs
-TimeRule rule = TimeRule.Parse("Always");
+var rule = When.Parse("Always");
 rule.Match(DateTime.Now); // always true
 ```
 ### 🔹 Never
 ```cs
-TimeRule rule = TimeRule.Parse("Never");
+var rule = When.Parse("Never");
 rule.Match(DateTime.Now); // always false
 ```
 ### 🔹 From a Specific DateTime to Another
 ```cs
-TimeRule rule = TimeRule.Parse("From 2025-04-23T08:30 to 2025-04-23T17:45");
+var rule = When.Parse("From 2025-04-23T08:30 to 2025-04-23T17:45");
 rule.Match(new DateTime(2025, 4, 23, 9, 0, 0)); // true
 rule.Match(new DateTime(2025, 4, 24, 9, 0, 0)); // false
 ```
 ### 🔹 Recurring Rule: Every Day of the Week
 ```cs
-TimeRule rule = TimeRule.Parse("EveryMonday");
+var rule = When.Parse("EveryMonday");
 rule.Match(new DateTime(2025, 5, 5)); // true if Monday
 ```
 ### 🔹 Recurring with Time Range
 ```cs
-TimeRule rule = TimeRule.Parse("EveryFriday from 14:00 to 18:00");
+var rule = When.Parse("EveryFriday from 14:00 to 18:00");
 rule.Match(new DateTime(2025, 6, 6, 15, 30, 0)); // true
 rule.Match(new DateTime(2025, 6, 6, 19, 0, 0));  // false
 ```
 ### 🔹 EveryWeekend (Saturday & Sunday)
 ```cs
-TimeRule rule = TimeRule.Parse("EveryWeekend");
+var rule = When.Parse("EveryWeekend");
 rule.Match(new DateTime(2025, 5, 25)); // true if Sunday
 ```
 ### 🔹 EveryWeekend with Time Range
 ```cs
-TimeRule rule = TimeRule.Parse("EveryWeekend from 10:00 to 16:00");
+var rule = When.Parse("EveryWeekend from 10:00 to 16:00");
 rule.Match(new DateTime(2025, 5, 24, 12, 0, 0)); // true if Saturday
 ```
 
@@ -77,7 +77,7 @@ rule.Match(new DateTime(2025, 5, 24, 12, 0, 0)); // true if Saturday
 ```cs
 try
 {
-    var rule = TimeRule.Parse("EveryBlursday");
+    var rule = When.Parse("EveryBlursday");
 }
 catch (ArgumentException ex)
 {

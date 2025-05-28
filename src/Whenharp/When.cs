@@ -1,8 +1,9 @@
 ﻿using System.Globalization;
 using System.Text.RegularExpressions;
+using Whenharp.Rules;
 
-namespace Whenharp.Rules;
-public abstract class TimeRule
+namespace Whenharp;
+public abstract class When
 {
     /// <summary>
     /// Returns true if the given datetime matches the rule.
@@ -12,7 +13,7 @@ public abstract class TimeRule
     /// <summary>
     /// Parse the rule expression and return the appropriate TimeRule object.
     /// </summary>
-    public static TimeRule Parse(string input)
+    public static When Parse(string input)
     {
         if (string.IsNullOrWhiteSpace(input))
             throw new ArgumentException("Input cannot be null or empty.");
