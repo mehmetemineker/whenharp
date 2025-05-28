@@ -7,7 +7,7 @@ on:
       
 jobs:
   build-and-publish:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - name: Checkout repository
@@ -35,4 +35,4 @@ jobs:
       - name: Push NuGet package
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-        run: nuget push *.nupkg -Source https://api.nuget.org/v3/index.json -ApiKey $NUGET_API_KEY
+        run: nuget push *.nupkg -src https://api.nuget.org/v3/index.json ${{secrets.NUGET_API_KEY}}
