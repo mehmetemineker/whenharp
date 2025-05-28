@@ -88,3 +88,7 @@ catch (ArgumentException ex)
     Console.WriteLine($"Invalid rule: {ex.Message}");
 }
 ```
+
+## Attributions
+
+The icon used for the package belongs to [Freepik](https://www.flaticon.com/free-icon/flux_6642118).
