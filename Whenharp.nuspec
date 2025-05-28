@@ -3,7 +3,7 @@
   <metadata>
     <id>Whenharp</id>
     <title>Whenharp</title>
-    <version>1.0.0-alpha.2505.2</version>
+    <version>1.0.0-alpha.2505.3</version>
     <authors>Mehmet Emin Eker</authors>
     <license type="expression">Apache-2.0</license>
     <projectUrl>https://github.com/mehmetemineker/whenharp</projectUrl>
@@ -12,6 +12,7 @@
     <releaseNotes>Initial release with basic rules like Always, Never, Range, and recurring day-time combinations.</releaseNotes>
     <copyright>Copyright © 2025 Mehmet Emin Eker</copyright>
     <tags>datetime rules time dotnet</tags>
+    <readme>README.md</readme>
   </metadata>
 
   <files>
