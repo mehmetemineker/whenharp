@@ -1,6 +1,6 @@
-![Tests](https://github.com/mehmetemineker/whenharp/actions/workflows/dotnet-tests.yml/badge.svg)
-
 # Whenharp
+
+![Tests](https://github.com/mehmetemineker/whenharp/actions/workflows/dotnet-tests.yml/badge.svg)
 
 **Whenharp** is a lightweight and powerful .NET library designed to parse human-readable time rules and determine whether a given `DateTime` matches those rules.
 
