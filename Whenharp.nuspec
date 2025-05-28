@@ -15,7 +15,7 @@
   </metadata>
 
   <files>
-    <file src="src\Whenharp\bin\Release\net9.0\publish\*" target="lib\net9.0" />
+    <file src="publish\*" target="lib" />
     <file src="LICENSE" />
     <file src="README.md" />
   </files>
