@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Whenharp</id>
+    <title>Whenharp</title>
+    <version>1.0.0-alpha.2505.1</version>
+    <authors>Mehmet Emin Eker</authors>
+    <license type="expression">Apache-2.0</license>
+    <projectUrl>https://github.com/mehmetemineker/whenharp</projectUrl>
+    <repository type="git" url="https://github.com/mehmetemineker/whenharp.git" />
+    <description>Whenharp is a lightweight and powerful .NET library designed to parse human-readable time rules and determine whether a given DateTime matches those rules.</description>
+    <releaseNotes>Initial release with basic rules like Always, Never, Range, and recurring day-time combinations.</releaseNotes>
+    <copyright>Copyright © 2025 Mehmet Emin Eker</copyright>
+    <tags>datetime scheduler rules time dotnet</tags>
+  </metadata>
+
+  <files>
+    <file src="src\Whenharp\bin\Release\net9.0\publish\*" target="lib\net9.0" />
+    <file src="LICENSE" />
+    <file src="README.md" />
+  </files>
+</package>
